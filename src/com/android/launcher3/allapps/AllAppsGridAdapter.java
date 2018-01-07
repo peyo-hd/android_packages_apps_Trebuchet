@@ -417,7 +417,7 @@ public class AllAppsGridAdapter extends RecyclerView.Adapter<AllAppsGridAdapter.
         ResolveInfo marketInfo = pm.resolveActivity(createMarketSearchIntent(""),
                 PackageManager.MATCH_DEFAULT_ONLY);
         if (marketInfo != null) {
-            mMarketAppName = marketInfo.loadLabel(pm).toString();
+            //mMarketAppName = marketInfo.loadLabel(pm).toString();
         }
 
         mRemoteFolderManager = launcher.getRemoteFolderManager();
