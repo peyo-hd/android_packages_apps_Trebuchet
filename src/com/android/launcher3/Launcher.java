@@ -1830,6 +1830,11 @@ public class Launcher extends Activity
         ShortcutInfo info = InstallShortcutReceiver.fromShortcutIntent(this, data);
         if (info == null) {
             return;
+        } else {
+            ComponentName compName = info.getIntent().getComponent();
+            if (compName != null && isHiddenPkg(compName.getPackageName())) {
+                return;
+            }
         }
         final View view = createShortcut(info);
 
@@ -4370,6 +4375,10 @@ public class Launcher extends Activity
                 case LauncherSettings.Favorites.ITEM_TYPE_APPLICATION:
                 case LauncherSettings.Favorites.ITEM_TYPE_SHORTCUT:
                     ShortcutInfo info = (ShortcutInfo) item;
+                    ComponentName compName = info.getIntent().getComponent();
+                    if (compName != null && isHiddenPkg(compName.getPackageName())) {
+                        continue;
+                    }
                     view = createShortcut(info);
 
                     /*
@@ -5424,6 +5433,14 @@ public class Launcher extends Activity
             AnimationDrawable frameAnimation = (AnimationDrawable) mAnimatedArrow.getBackground();
             frameAnimation.start();
         }
+    }
+
+    public static boolean isHiddenPkg(String pkgName) {
+        if (pkgName.equals("com.android.vending") ||
+                pkgName.equals("com.android.dialer"))
+            return true;
+        else
+            return false;
     }
 }
 

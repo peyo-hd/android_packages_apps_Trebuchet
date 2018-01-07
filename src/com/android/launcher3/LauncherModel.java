@@ -3163,8 +3163,14 @@ public class LauncherModel extends BroadcastReceiver
                 }
 
                 // Create the ApplicationInfos
-                for (int i = 0; i < apps.size(); i++) {
+                for (int i = 0; i < apps.size();) {
                     LauncherActivityInfoCompat app = apps.get(i);
+                    if (Launcher.isHiddenPkg(app.getComponentName().getPackageName())) {
+                        apps.remove(i);
+                        continue;
+                    } else {
+                        i++;
+                    }
                     // This builds the icon bitmaps.
                     mBgAllAppsList.add(new AppInfo(mContext, app, user, mIconCache));
                 }

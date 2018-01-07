@@ -730,8 +730,6 @@ public class AllAppsGridAdapter extends RecyclerView.Adapter<AllAppsGridAdapter.
     }
 
     private boolean showMarketLink() {
-        return mMarketAppPackageName != null &&
-                !ProtectedComponentsHelper.isProtectedPackage(mMarketAppFlags,
-                        mMarketAppPackageName);
+        return false;
     }
 }
